@@ -5,20 +5,12 @@ import logo from '../images/logo.svg';
 import './css/Global.css';
 import firebase from 'firebase';
 
-
 class Login extends Component {
-
-  constructor () {
-    super();
-    this.state = {
-      user: null
-    };
-    // Bindeo de los this --> referenciar los objetos this
-    this.handleAuth = this.handleAuth.bind(this);
-  }
   
+  // Functions
+
   // función para logearte por Google
-  handleAuth () {
+  handleAuth () { 
     const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider)
@@ -26,14 +18,15 @@ class Login extends Component {
     .catch(error => console.log(`Error ${error.message}`));
   }
 
+
   render () {
     return (
       <div className="Login">
         <div className="Login-container">
           <img className="mt-4 mb-4" src= { require('../images/appName.png') } alt="appName" />
-          <img src={logo} className="Login-logo" alt="logo" />
+          <img src={ logo } className="Login-logo" alt="logo" />
           <p>
-            <button className="loginBtn loginBtn--google" onClick={ this.handleAuth }>Inicia sesión con Google</button>
+            <button className="loginBtn loginBtn--google" onClick={ this.handleAuth.bind(this) }>Inicia sesión con Google</button>
           </p>
         </div>
       </div>

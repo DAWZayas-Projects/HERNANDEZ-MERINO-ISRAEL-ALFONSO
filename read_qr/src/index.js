@@ -6,12 +6,11 @@ import { Router, Route, browserHistory } from 'react-router';
 import './index.css';
 import firebaseApp from './firebase';
 import registerServiceWorker from './registerServiceWorker';
-
 // Pages
 import App from './pages/App';
 import Login from './pages/Login';
 
-
+// Firebase
 firebaseApp.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('Conected...');
