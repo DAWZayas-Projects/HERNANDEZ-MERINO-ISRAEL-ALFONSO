@@ -2,6 +2,7 @@
 /*// LOGIN //*/
 
 .Login {
+  background-color: #FBFCFC;
   text-align: center;
 }
 
@@ -10,26 +11,19 @@
   height: 50vmin;
 }
 
-.Login-name {
-  margin: 2em 0 2em 0;
-}
-
 .Login-container {
-  background-color: rgb(214, 214, 221);
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
 }
 
 /* login with network socials */
 .loginBtn {
   position: relative;
   margin-top: 5em;
-  width: 12em;
-  height: 30px;
+  width: 14em;
+  height: 35px;
   padding-left: 2.5em;
   border: none;
   text-align: left;

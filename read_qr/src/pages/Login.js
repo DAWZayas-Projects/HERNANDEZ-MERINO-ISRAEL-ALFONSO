@@ -30,10 +30,10 @@ class Login extends Component {
     return (
       <div className="Login">
         <div className="Login-container">
-          <img className="Login-name" src= { require('../images/appName.png') } alt="appName" />
+          <img className="mt-4 mb-4" src= { require('../images/appName.png') } alt="appName" />
           <img src={logo} className="Login-logo" alt="logo" />
           <p>
-            <button className="loginBtn loginBtn--google" onClick={ this.handleAuth }>Login con Google</button>
+            <button className="loginBtn loginBtn--google" onClick={ this.handleAuth }>Inicia sesión con Google</button>
           </p>
         </div>
       </div>

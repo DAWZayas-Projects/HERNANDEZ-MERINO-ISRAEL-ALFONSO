@@ -22,7 +22,6 @@ class App extends Component {
 		return (
 			<div>
 				<Header />
-				<h1>BODY</h1>
 			</div>
 		);
 	}
