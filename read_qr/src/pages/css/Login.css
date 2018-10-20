@@ -1,17 +1,17 @@
 
 /*// LOGIN //*/
 
-.Login {
+.main {
   background-color: #FBFCFC;
   text-align: center;
 }
 
-.Login-logo {
+.logo {
   animation: App-logo-spin infinite 20s linear;
   height: 50vmin;
 }
 
-.Login-container {
+.container {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -45,13 +45,6 @@
   width: 34px;
   height: 100%;
 }
-.loginBtn:focus {
-  outline: none;
-}
-.loginBtn:active {
-  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
-}
-
 /* Google */
 .loginBtn--google {
   background: #DD4B39;
@@ -64,12 +57,10 @@
   background: #E74B37;
 }
 
-/*
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Pantalla movil */
+@media screen and (max-width:640px) {
+  .loginBtn {
+    margin-top: 10em
   }
-  to {
-    transform: rotate(360deg);
-  }
-}*/
+}
+

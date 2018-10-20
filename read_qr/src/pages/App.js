@@ -1,7 +1,6 @@
 // Dependencies
 import React, { Component } from 'react';
 // Assets
-import './css/Global.css';
 import firebase from 'firebase';
 import firebaseApp from '../firebase';
 // Components

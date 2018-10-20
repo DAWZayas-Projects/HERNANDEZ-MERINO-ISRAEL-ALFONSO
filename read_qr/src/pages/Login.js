@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 // Assets
 import logo from '../images/logo.svg';
-import './css/Global.css';
+import './css/Login.css';
 import firebase from 'firebase';
 
 class Login extends Component {
@@ -21,10 +21,10 @@ class Login extends Component {
 
   render () {
     return (
-      <div className="Login">
-        <div className="Login-container">
-          <img className="mt-4 mb-4" src= { require('../images/appName.png') } alt="appName" />
-          <img src={ logo } className="Login-logo" alt="logo" />
+      <div className="main">
+        <div className="container">
+          <img className="mt-4 mb-4" src= { require('../images/appNameBlack.png') } alt="appName" />
+          <img src={ logo } className="logo" alt="logo" />
           <p>
             <button className="loginBtn loginBtn--google" onClick={ this.handleAuth.bind(this) }>Inicia sesión con Google</button>
           </p>
