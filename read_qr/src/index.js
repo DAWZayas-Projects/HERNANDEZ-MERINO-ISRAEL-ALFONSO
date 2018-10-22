@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 // Assets
 import './index.css';
-import firebaseApp from './firebase';
+import firebaseApp from './firebase/firebase';
 import registerServiceWorker from './registerServiceWorker';
 // Pages
 import App from './pages/App';

@@ -2,9 +2,12 @@
 import React, { Component } from 'react';
 // Assets
 import firebase from 'firebase';
-import firebaseApp from '../firebase';
+import firebaseApp from '../firebase/firebase';
 // Components
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
+// Data
+import items from '../data/menu';
 
 class App extends Component {
 
@@ -48,7 +51,12 @@ class App extends Component {
 	render () {
 		return (
 			<div>
-				<Header isLogout={ this.handleLogout } isUser={ this.state.user } />
+				<Header 
+					isLogout={ this.handleLogout } 
+					isUser={ this.state.user } 
+          items={items} 
+				/>
+				<Footer />
 			</div>
 		);
 	}
