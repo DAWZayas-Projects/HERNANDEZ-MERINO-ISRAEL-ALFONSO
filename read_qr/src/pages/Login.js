@@ -21,14 +21,15 @@ class Login extends Component {
 
   render () {
     return (
-      <div className="main">
-        <div className="container">
-          <img className="mt-4 mb-4" src= { require('../images/appNameBlack.png') } alt="appName" />
-          <img src={ logo } className="logo" alt="logo" />
-          <p>
-            <button className="loginBtn loginBtn--google" onClick={ this.handleAuth.bind(this) }>Inicia sesión con Google</button>
-          </p>
-        </div>
+      <div className="container">
+
+        <img className="mt-4 mb-4" src= { require('../images/appNameBlack.png') } alt="appName" />
+        <img src={ logo } className="logo" alt="logo" width="200" />
+        
+        <p>
+          <button className="loginBtn loginBtn--google" onClick={ this.handleAuth.bind(this) }>Inicia sesión con Google</button>
+        </p>
+
       </div>
     );
   }

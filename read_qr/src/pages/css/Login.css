@@ -1,16 +1,4 @@
 
-/*// LOGIN //*/
-
-.main {
-  background-color: #FBFCFC;
-  text-align: center;
-}
-
-.logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 50vmin;
-}
-
 .container {
   display: flex;
   min-height: 100vh;
@@ -58,6 +46,7 @@
 }
 
 /* Pantalla movil */
+
 @media screen and (max-width:640px) {
   .loginBtn {
     margin-top: 10em

@@ -1,0 +1,17 @@
+// Dependencies
+import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+// Assets
+import AppRoutes from './utils/routes';
+
+class App extends Component {
+   render() {
+    return (
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    );
+  }
+}
+
+export default App;

@@ -7,7 +7,7 @@ import './index.css';
 import firebaseApp from './firebase/firebase';
 import registerServiceWorker from './registerServiceWorker';
 // Pages
-import App from './pages/App';
+import App from './App';
 import Login from './pages/Login';
 
 // Firebase

@@ -1,15 +1,20 @@
 // Dependencies
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 // Assets
 import './css/Header.css';
 
 class Header extends Component {
 
+	static propTypes = {
+		items: PropTypes.array.isRequired
+	};
+
 	constructor () {
 		super();
 		this.state = {
-			user: null,
-			items: null 
+			user: null
 		}
 	}
 
@@ -18,8 +23,7 @@ class Header extends Component {
 	// Se ejecutará una vez se monte el componente.
 	componentWillReceiveProps(nextProps) {	
 		this.setState({ 
-			user: nextProps.isUser,
-			items: nextProps.items
+			user: nextProps.user
 		})
 	}
 
@@ -39,6 +43,8 @@ class Header extends Component {
 	
 
 	render () {
+
+		const { items } = this.props;
 		
 		return (
 			<div>
@@ -55,10 +61,10 @@ class Header extends Component {
 
 						<ul className="navbar-nav">
 							{
-								this.state.items && this.state.items.map(
+								items && items.map(
 									(item, key) => 
 										<li className="nav-item" key={ key }>
-											<a className="nav-link text-white" href="/">{ item.title }</a>
+											<Link className="nav-link text-white" to={ item.url } >{ item.title }</Link>
 										</li>
 								)
 							}

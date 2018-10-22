@@ -1,18 +1,24 @@
 // Dependencies
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // Assets
 import firebase from 'firebase';
 import firebaseApp from '../firebase/firebase';
 // Components
 import Header from '../components/layout/Header';
+import Content from '../components/layout/Content';
 import Footer from '../components/layout/Footer';
 // Data
-import items from '../data/menu';
+import menu from '../data/menu';
 
-class App extends Component {
+class Main extends Component {
 
-	constructor (props) {
-		super(props);
+	static propTypes = {
+    children: PropTypes.object.isRequired
+  };
+
+	constructor () {
+		super();
 		this.state = {
 			user: null
 		}
@@ -49,17 +55,21 @@ class App extends Component {
 
 
 	render () {
+
+		const { children } = this.props;
+
 		return (
 			<div>
 				<Header 
 					isLogout={ this.handleLogout } 
-					isUser={ this.state.user } 
-          items={items} 
+					user={ this.state.user } 
+          items={ menu } 
 				/>
+				<Content body={ children } />
 				<Footer />
 			</div>
 		);
 	}
 }
 
-export default App;
+export default Main;

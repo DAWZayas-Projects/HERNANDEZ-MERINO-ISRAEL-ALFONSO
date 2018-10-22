@@ -1,7 +1,7 @@
 export default [
 	{
 		title: 'Inicio',
-		url: '/'
+		url: '/app'
 	},
 	{
 		title: 'Eventos',
