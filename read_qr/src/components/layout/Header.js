@@ -35,7 +35,7 @@ class Header extends Component {
 			return (
 				<div className="row d-lg-none">
 				<img className="rounded-circle ml-3 mr-3 mt-1" width="50" height="50" src={ this.state.user.photoURL } alt={ this.state.user.displayName } />
-				<p className="text-white mt-3">Hola { this.state.user.displayName }</p>
+				<p className="text-white mt-3">{ this.state.user.displayName }</p>
 				</div>
 			);
 		} 

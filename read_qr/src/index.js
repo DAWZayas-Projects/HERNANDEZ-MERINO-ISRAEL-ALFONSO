@@ -1,11 +1,12 @@
 // Dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, Switch } from 'react-router-dom';
 // Assets
 import './index.css';
 import firebaseApp from './firebase/firebase';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './utils/registerServiceWorker';
+import history from './utils/history';
 // Pages
 import App from './App';
 import Login from './pages/Login';
@@ -14,19 +15,21 @@ import Login from './pages/Login';
 firebaseApp.auth().onAuthStateChanged(user => {
   if (user) {
     console.log('Conected...');
-    browserHistory.push('/app');
+    history.push("/");
   } else {
     console.log('Disconnected...');
-    browserHistory.replace('/login');
+    history.replace('/login');
   }
 
 })
 
 
 ReactDOM.render(
-  <Router path="/" history={browserHistory}>
-    <Route path="/app" component={App} />
-    <Route path="/login" component={Login} />
+  <Router history={history}>
+    <Switch>
+      <Route exact path="/" component={App} />
+      <Route exact path="/login" component={Login} />
+    </Switch>
   </Router>,
   document.getElementById('root')
 );
