@@ -4,20 +4,24 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router-dom';
 // Assets
 import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import firebaseApp from './firebase/firebase';
-import registerServiceWorker from './utils/registerServiceWorker';
 import history from './utils/history';
 // Pages
-import App from './App';
-import Login from './pages/Login';
+import Login from './landing/Login';
+import App from './route/App';
 
-// Firebase
 firebaseApp.auth().onAuthStateChanged(user => {
+  
   if (user) {
     console.log('Conected...');
+    localStorage.setItem('userName', user.displayName);
+    localStorage.setItem('userPhoto', user.photoURL);
     history.push("/");
   } else {
     console.log('Disconnected...');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userPhoto');
     history.replace('/login');
   }
 

@@ -14,28 +14,21 @@ class Header extends Component {
 	constructor () {
 		super();
 		this.state = {
-			user: null
+			userName: localStorage.getItem('userName'),
+			userPhoto: localStorage.getItem('userPhoto')
 		}
-	}
-
-	// Methods //
-
-	// Se ejecutará una vez se monte el componente.
-	componentWillReceiveProps(nextProps) {	
-		this.setState({ 
-			user: nextProps.user
-		})
 	}
 
 	// Functions //
 
 	// Si el usuario está logeado
 	renderLogged () {
-		if (this.state.user) {	
+
+		if (this.state.userName && this.state.userPhoto) {	
 			return (
 				<div className="row d-lg-none">
-				<img className="rounded-circle ml-3 mr-3 mt-1" width="50" height="50" src={ this.state.user.photoURL } alt={ this.state.user.displayName } />
-				<p className="text-white mt-3">{ this.state.user.displayName }</p>
+				<img className="rounded-circle ml-3 mr-3 mt-1" width="50" height="50" src={ this.state.userPhoto } alt={ this.state.userName } />
+				<p className="text-white mt-3">{ this.state.userName }</p>
 				</div>
 			);
 		} 
