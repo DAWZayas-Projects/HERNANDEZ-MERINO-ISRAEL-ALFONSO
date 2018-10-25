@@ -1,16 +1,16 @@
-// Dependencies
+// Dependecies
 import React, { Component } from 'react';
 import { BrowserRouter as Route } from 'react-router-dom';
 // Assets
-import AppRoutes from '../utils/routes';
+import MenuRoutes from './utils/menuRoutes';
 
 
 class App extends Component {
 
-  render() {
+  render () {
     return (
       <Route>
-        <AppRoutes />
+        <MenuRoutes />
       </Route>
     );
   }

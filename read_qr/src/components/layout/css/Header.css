@@ -1,9 +1,25 @@
 
 @media screen and (min-width:640px) {
 
-	.button-logout {
+	.info-logged {
 		float: right;
-		
+	}
+	.display-name {
+		margin: 7px 10px 0 0;
+		color: rgb(241, 235, 235);
+	}
+
+}
+
+@media screen and (max-width:640px) {
+
+	.display-name {
+		display: none;
+	}
+
+	.button-logged {
+		margin: auto;
+		padding-bottom: 10px;
 	}
 
 }
