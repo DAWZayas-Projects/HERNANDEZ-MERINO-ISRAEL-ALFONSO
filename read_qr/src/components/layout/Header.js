@@ -51,7 +51,7 @@ class Header extends Component {
 				return (
 					<div className="row col-xs-auto info-logged">
 						<div className="display-name">
-							<i className="fas fa-user mr-1" /> { this.state.user.displayName } 
+							<i className="fa fa-user mr-1" /> { this.state.user.displayName } 
 						</div>
 						<button className="btn btn-link button-logged" onClick={ this.props.logout }> Salir </button>
 					</div>

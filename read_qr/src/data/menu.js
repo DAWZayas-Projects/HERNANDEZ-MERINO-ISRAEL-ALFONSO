@@ -1,7 +1,7 @@
 export default [
 	{
 		title: 'Inicio',
-		url: '/home'
+		url: '/'
 	},
 	{
 		title: 'Eventos',
