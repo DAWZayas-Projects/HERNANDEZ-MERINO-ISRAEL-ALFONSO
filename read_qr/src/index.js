@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 // App
-import App from './App';
+import App from './containers/App';
 
 
 ReactDOM.render(

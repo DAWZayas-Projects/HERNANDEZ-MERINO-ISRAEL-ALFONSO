@@ -2,10 +2,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // Components
-import Container from '../pages/Container';
-import Home from '../components/main/Home';
-import Events from '../components/main/Events';
-import Contact from '../components/main/Contact';
+import Container from '../containers/Main';
+import Home from '../components/pages/Home';
+import Events from '../components/pages/Events';
+import Contact from '../components/pages/Contact';
 
 
 const MenuRoutes = () => 
