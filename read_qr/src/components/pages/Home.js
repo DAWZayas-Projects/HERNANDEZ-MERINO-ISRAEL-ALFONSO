@@ -4,12 +4,28 @@ import React, { Component } from 'react';
 import items from '../../data/events';
 // Assets
 import './css/Home.css';
+import store from '../../stored/store';
 
 
 class Home extends Component {
 
-  render() {
+  constructor() {
+    super();
+
+    this.state = {
+      user: null
+    };
+
+    store.subscribe(() => {
+      this.setState({
+        user: store.getState().user
+      });
+    });
     
+  }
+
+  render() {
+ 
     return (
       
       <div className="container py-4">
@@ -28,8 +44,8 @@ class Home extends Component {
               <div className="modal-body mx-3">
 
                 <div className="md-form mb-2">
-                  <label data-error="wrong" data-success="right" htmlFor="form1" >Nombre Completo:</label>
-                  <input type="text" id="form3" className="form-control validate" />
+                  <label data-error="wrong" data-success="right" htmlFor="form1">Nombre Completo:</label>
+                  <input type="text" id="form3" className="form-control validate"required/> 
                 </div>
                 <div className="md-form mb-2">
                   <label data-error="wrong" data-success="right" htmlFor="form2">Dirección:</label>

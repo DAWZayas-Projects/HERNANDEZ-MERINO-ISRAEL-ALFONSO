@@ -12,6 +12,8 @@ import ContentMenu from '../components/common/ContentMenu';
 import Footer from '../components/layout/Footer';
 // Data
 import menu from '../data/menu';
+// Assets
+import store from '../stored/store';
 
 class Container extends Component {
 
@@ -34,13 +36,18 @@ class Container extends Component {
 	// Methods
 
 	componentWillMount() {
-		firebaseApp.auth().onAuthStateChanged(user => {
-			this.setState({ user });
-		})
-
+		this.getUserFirebase();
 	}
 
 	// Functions //
+
+	// Obtener datos del user de firebase
+	getUserFirebase() {
+		firebaseApp.auth().onAuthStateChanged(user => {
+			this.setState({ user });
+			this.setStoreUser(user);
+		});
+	}
 
 	// función para logearte por Google
   handleAuth() { 
@@ -54,7 +61,14 @@ class Container extends Component {
 	handleLogout() {
     firebase.auth().signOut()
     .then(result => console.log(`${result.user.email} ha salido`))
-    .catch(error => console.log(`Error ${error.message}`));
+		.catch(error => console.log(`Error ${error.message}`));
+	}
+
+	setStoreUser(user) {
+		store.dispatch({
+			type: "SET_USER",
+			user
+		})
 	}
 
 
@@ -68,7 +82,6 @@ class Container extends Component {
 					login={ this.handleAuth }
 					logout={ this.handleLogout } 
 					items={ menu } 
-					user={ this.state.user }
 				/>
 				<ContentMenu 
 					body={ children } 
@@ -77,6 +90,7 @@ class Container extends Component {
 			</div>
 		);
 	}
+
 }
 
 export default Container;
