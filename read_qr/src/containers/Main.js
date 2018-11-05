@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 // Firebase
 import firebase from 'firebase/app';
 import 'firebase/auth';
-//import 'firebase/firestore';
-import firebaseApp from '../firebase/firebase';
 // Components
 import Header from '../components/layout/Header';
 import ContentMenu from '../components/common/ContentMenu';
@@ -27,27 +25,18 @@ class Container extends Component {
 		this.state = {
 			user: null
 		}
+
+		store.subscribe(() => {
+      this.setState({ user: store.getState().user });
+		});
+		
 		// Bindeo de los this --> referenciar los objetos this
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleAuth = this.handleAuth.bind(this);
 		
 	}
 
-	// Methods
-
-	componentWillMount() {
-		this.getUserFirebase();
-	}
-
 	// Functions //
-
-	// Obtener datos del user de firebase
-	getUserFirebase() {
-		firebaseApp.auth().onAuthStateChanged(user => {
-			this.setState({ user });
-			this.setStoreUser(user);
-		});
-	}
 
 	// función para logearte por Google
   handleAuth() { 
@@ -64,13 +53,6 @@ class Container extends Component {
 		.catch(error => console.log(`Error ${error.message}`));
 	}
 
-	setStoreUser(user) {
-		store.dispatch({
-			type: "SET_USER",
-			user
-		})
-	}
-
 
 	render() {
 
@@ -82,6 +64,7 @@ class Container extends Component {
 					login={ this.handleAuth }
 					logout={ this.handleLogout } 
 					items={ menu } 
+					user={ this.state.user}
 				/>
 				<ContentMenu 
 					body={ children } 
@@ -89,6 +72,7 @@ class Container extends Component {
 				<Footer />
 			</div>
 		);
+		
 	}
 
 }
