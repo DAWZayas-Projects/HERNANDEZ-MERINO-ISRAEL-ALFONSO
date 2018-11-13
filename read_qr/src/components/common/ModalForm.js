@@ -4,6 +4,7 @@ import React, { Component} from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+
 class ModalForm extends Component {
 
   constructor(props) {
@@ -11,10 +12,12 @@ class ModalForm extends Component {
 
     this.state = {
       isLogin: false,
+      title: '',
       uid: '',
       fullName: '',
-      direccion: '',
-      country: '',
+      urlPhoto: '',
+      address: '',
+      city: '',
       email: '',
       telf: '',
       date: ''
@@ -26,28 +29,11 @@ class ModalForm extends Component {
 
   // Methods
 
-  componentDidMount() {
-    (function() {
-      window.addEventListener('load', function() {
-        // Obtenga todos los formularios a los que queremos aplicar estilos personalizados de validación de Bootstrap
-        var forms = document.getElementsByClassName('needs-validation');
-        // Pasa sobre ellos y evita la sumisión.
-        Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-  }
-	
-	componentWillReceiveProps (props) {
+  componentWillReceiveProps (props) {
 		this.setState({ 
       isLogin: props.user ? true : false,
+      title: props.item ? props.item.title : '',
+      urlPhoto: props.item ? props.item.url : '',
       uid: props.user ? props.user.uid : '',
       fullName : props.user ? props.user.displayName : '',
       email: props.user ? props.user.email : ''
@@ -61,8 +47,8 @@ class ModalForm extends Component {
     
     this.setState({
       fullName: this.refs.fullName.value,
-      direccion: this.refs.direccion.value,
-      country: this.refs.country.value,
+      address: this.refs.address.value,
+      city: this.refs.city.value,
       email: this.refs.email.value,
       telf: this.refs.telf.value
     })
@@ -70,26 +56,35 @@ class ModalForm extends Component {
 
   handleEvents = (e) => {
     e.preventDefault();
-    
-    if (this.state.isLogin) {
-      console.log('Saving in firebase...');
+    console.log('Saving in firebase...');
 
-      const data = {
-        category: 'Musica',
-        urlPhoto: '',
-        fullName: this.state.fullName,
-        direccion: this.state.direccion,
-        country: this.state.country,
-        email: this.state.email,
-        telf: this.state.telf,
-        date: new Date().toJSON().slice(0,10)
-      }
+    // Get a key for a new Workout.
+    const newTargetKey = firebase.database().ref('/targets/').push().key
 
-      const dbRef = firebase.database().ref('registered/'+ this.state.uid +'/');
-      const newEvent = dbRef.push();
-      newEvent.set(data);
+    const data = {
+      key: newTargetKey,
+      title: this.state.title,
+      urlPhoto: this.state.urlPhoto,
+      fullName: this.state.fullName,
+      address: this.state.address,
+      city: this.state.city,
+      email: this.state.email,
+      telf: this.state.telf,
+      date: new Date().toJSON().slice(0,10)
     }
 
+    const updates = {}
+
+    updates['/targets/' + newTargetKey] = data;
+        
+    if (this.state.isLogin) {
+      updates['/registered/' + this.state.uid +'/' + newTargetKey] = data;
+    }
+
+    firebase.database().ref().update(updates);
+   
+    setTimeout(() => { window.location.reload(true) }, 750);
+   
   }
   
 
@@ -102,48 +97,45 @@ class ModalForm extends Component {
           <div className="modal-content">
 
             <div className="modal-header text-center">
-              <h4 className="modal-title w-100 font-weight-bold">{ this.props.title }</h4>
+              <h4 className="modal-title w-100 font-weight-bold">{ this.state.title }</h4>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
             </div>
 
-            <form className="needs-validation" noValidate>
+            <form onSubmit={ this.handleEvents }>
               <div className="modal-body mx-3">
 
                 <div className="md-form mb-2">
-                  <label htmlFor="validationServer01" >Nombre Completo:</label>
-                  <input type="text" ref="fullName" className="form-control validate" id="validationCustom01" value={ this.state.fullName } onChange={ this.handleChange } disabled={this.state.isLogin} /> 
+                  <label htmlFor="validationDefault01" >Nombre Completo:</label>
+                  <input type="text" ref="fullName" className="form-control" minLength="10" id="validationDefault01" value={ this.state.fullName } onChange={ this.handleChange } disabled={this.state.isLogin} required/> 
                 </div>
                 <div className="md-form mb-2">
-                  <label htmlFor="validationCustom02" >Dirección:</label>
-                  <input type="text" ref="direccion" className="form-control validate" id="validationCustom02" value={ this.state.direccion } onChange={ this.handleChange } required/>
-                  <div className="invalid-feedback">
-                    Por favor ingresa tu dirección.
-                  </div>
+                  <label htmlFor="validationDefault02">Dirección:</label>
+                  <input type="text" ref="address" className="form-control" minLength="10" id="validationDefault02" value={ this.state.address } onChange={ this.handleChange } required/>
                 </div>
                 <div className="md-form mb-2">
-                  <label data-error="wrong" data-success="right" >Ciudad:</label>
-                  <input type="text" ref="country" className="form-control validate" value={ this.state.country } onChange={ this.handleChange } />
+                <label htmlFor="validationDefault03">Ciudad:</label>
+                  <input type="text" ref="city" className="form-control" minLength="3" id="validationDefault03" value={ this.state.city } onChange={ this.handleChange } required/>
                 </div>
                 <div className="md-form mb-2">
-                  <label data-error="wrong" data-success="right" >E-mail:</label>
-                  <input type="email" ref="email" className="form-control validate" value={ this.state.email } onChange={ this.handleChange } disabled={this.state.isLogin} />
+                <label htmlFor="validationDefault04">E-mail:</label>
+                  <input type="email" ref="email" className="form-control" id="validationDefault04" value={ this.state.email } onChange={ this.handleChange } disabled={this.state.isLogin} required/>
                 </div>
                 <div className="md-form mb-2">
-                  <label data-error="wrong" data-success="right" >Telefono movil:</label>
+                <label htmlFor="validationDefault05">Telefono movil:</label>
                   <div className="input-group">
                     <span className="input-group-addon">+34</span>
-                    <input type="number" ref="telf" className="form-control validate" value={ this.state.telf } onChange={ this.handleChange } />
+                    <input type="number" ref="telf" className="form-control validate" id="validationDefault05" value={ this.state.telf } onChange={ this.handleChange } required/>
                   </div>
                 </div>
-
                 <div className="modal-footer d-flex justify-content-center">
-                  <button type="submit" className="btn btn-indigo"  >Enviar <i className="fa fa-paper-plane-o ml-1" ></i></button>
+                  <button type="submit" className="btn btn-indigo" value="submit">Enviar <i className="fa fa-paper-plane-o ml-1" ></i></button>
                 </div>
-              
+               
               </div>
             </form>
+            
 
           </div>
         </div>

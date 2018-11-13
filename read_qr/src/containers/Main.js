@@ -44,13 +44,16 @@ class Container extends Component {
 
     firebase.auth().signInWithPopup(provider)
     .then(result => console.log(`${result.user.email} ha iniciado sesión`))
-    .catch(error => console.log(`Error ${error.message}`));
+		.catch(error => console.log(`Error ${error.message}`));
+		console.log("Connected...");
   }
 	// Desconectar
 	handleLogout() {
     firebase.auth().signOut()
     .then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.message}`));
+		console.log("Disconnected...");
+		//setTimeout(() => { window.location.reload(true) });
 	}
 
 

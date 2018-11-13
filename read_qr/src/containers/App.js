@@ -10,7 +10,7 @@ import firebaseApp from '../firebase/firebase';
 
 class App extends Component {
 
-  	// Methods
+  // Methods
 
 	componentWillMount() {
 		// Obtener datos del user de firebase

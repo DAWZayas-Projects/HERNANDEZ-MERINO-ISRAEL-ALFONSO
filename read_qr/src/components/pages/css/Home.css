@@ -2,6 +2,10 @@ input {
   border: 2px solid #CCC !important;
 }
 
+.card-img-top {
+  border-radius: 5px 5px 0 0;
+}
+
 .input-group {
   background: rgb(209, 206, 206);
   
