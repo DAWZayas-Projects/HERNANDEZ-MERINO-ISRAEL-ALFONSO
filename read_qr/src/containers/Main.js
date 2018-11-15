@@ -25,16 +25,18 @@ class Container extends Component {
 		this.state = {
 			user: null
 		}
-
-		store.subscribe(() => {
-      this.setState({ user: store.getState().user });
-		});
 		
 		// Bindeo de los this --> referenciar los objetos this
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleAuth = this.handleAuth.bind(this);
 		
 	}
+
+	componentDidMount() {
+    store.subscribe(() => {
+      this.setState({ user: store.getState().user });
+    });
+  }
 
 	// Functions //
 
@@ -53,7 +55,7 @@ class Container extends Component {
     .then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.message}`));
 		console.log("Disconnected...");
-		//setTimeout(() => { window.location.reload(true) });
+		setTimeout(() => { window.location.reload(true) });
 	}
 
 

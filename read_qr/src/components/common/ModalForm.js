@@ -15,6 +15,7 @@ class ModalForm extends Component {
       title: '',
       uid: '',
       fullName: '',
+      category:'',
       urlPhoto: '',
       address: '',
       city: '',
@@ -28,11 +29,12 @@ class ModalForm extends Component {
   }
 
   // Methods
-
+  // Este metodo esperará a recibir nuevas props de un componente padre para ejecutarse. 
   componentWillReceiveProps (props) {
 		this.setState({ 
       isLogin: props.user ? true : false,
       title: props.item ? props.item.title : '',
+      category: props.item ? props.item.category : '',
       urlPhoto: props.item ? props.item.url : '',
       uid: props.user ? props.user.uid : '',
       fullName : props.user ? props.user.displayName : '',
@@ -63,6 +65,7 @@ class ModalForm extends Component {
 
     const data = {
       key: newTargetKey,
+      category: this.state.category,
       title: this.state.title,
       urlPhoto: this.state.urlPhoto,
       fullName: this.state.fullName,
@@ -97,7 +100,7 @@ class ModalForm extends Component {
           <div className="modal-content">
 
             <div className="modal-header text-center">
-              <h4 className="modal-title w-100 font-weight-bold">{ this.state.title }</h4>
+              <h4 className="modal-title w-100 font-weight-bold">{ this.state.category }</h4>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>

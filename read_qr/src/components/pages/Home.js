@@ -1,7 +1,6 @@
 // Dependencies
 import React, { Component } from 'react';
 // Assets
-import './css/Home.css';
 import store from '../../stored/store';
 //Common
 import ModalForm from '../common/ModalForm';
@@ -49,13 +48,19 @@ class Home extends Component {
         <div className="row">
           { Object.values(this.state.events).map((item, key) =>
 
-            <div className="col-md-4" key={ key }>
+            <div className="col-md-4 mb-4" key={ key }>
               <div className="card bg-light mt-2 mb-2">
                 <img className="card-img-top" src={ item.url } alt="" />
                 <div className="card-body">
                   <h4 className="card-title">{ item.title }</h4>
+                  <div className="tourname">Home Tour</div>
+                  <div className="date">{ item.date }</div>
+                  <div className="location bold">{ item.city }</div>
+                  <div className="rip"></div>
                   <p className="card-text">{ item.text }</p>
-                  <button className="btn btn-primary" onClick={() => this.updateDatesModal(item)} data-toggle="modal" data-target="#modalSubscriptionForm" >Suscribirse</button>
+                  <div className="bottom">
+                    <a className="buy" href="/" onClick={() => this.updateDatesModal(item)} data-toggle="modal" data-target="#modalSubscriptionForm">COMPRAR TICKET</a>
+                  </div>
                 </div>
               </div>
             </div>
