@@ -17,7 +17,13 @@ class App extends Component {
 	componentWillMount() {
 		// Obtener datos del user de firebase
 		firebaseApp.auth().onAuthStateChanged(user => {
-			this.setStoreUser(user);
+      if (user) {
+        this.setStoreUser(user);
+        localStorage.setItem('uid', user.uid);
+      } else {
+        localStorage.removeItem('uid');
+      }
+      
 		});
   }
   

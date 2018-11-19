@@ -1,10 +1,11 @@
 // Dependencies
 import React, { Component } from 'react';
-// Assets
-import store from '../../stored/store';
+import { Link } from 'react-router-dom';
 // Firebase
 import firebase from 'firebase/app';
 import 'firebase/database';
+// Common
+import ModalQr from '../common/ModalQr';
 
 class Events extends Component {
 
@@ -12,35 +13,36 @@ class Events extends Component {
     super(props);
 
     this.state = {
-      user: null,
+      uid: localStorage.getItem('uid'),
+      key: '',
       targets: null
     };
 
   }
 
   // Methods //
-  // Aquí es donde podemos manejar el componente ya renderizado y actualizado en el DOM.
-  componentDidUpdate() {
-    firebase.database().ref('/registered/'+ this.state.user.uid +'/').once('value').then((snapshot) => {
+
+  componentWillMount() {
+
+    firebase.database().ref('/registered/'+ this.state.uid +'/').once('value').then((snapshot) => {
       this.setState({ targets: snapshot.val() });
     }); 
-  }
 
-  componentDidMount() {
-    store.subscribe(() => {
-      this.setState({ user: store.getState().user });
-    });
   }
 
   // Functions //
+
+  updateKey(key) {
+    this.setState({ key })
+  }
 
   renderTargets() {
     if (this.state.targets) {
       return (
         <div className="row">
           { Object.values(this.state.targets).map((item, key) =>
-            <div className="col-md-12" key={ key }>
-            <figure className="snip1174 navy col-md-4">
+            <div className="col-md-4" key={ key }>
+            <figure className="snip1174 navy">
               <img src={ item.urlPhoto } alt="sq-sample33" />
               <figcaption>
                 <h2> { item.title } </h2>
@@ -48,9 +50,10 @@ class Events extends Component {
                   { item.date } <br />
                   <b> { item.city } </b> 
                 </p>
-                <a href="/target">Entrar</a>
+                <a href="/" className="btn btn-link" onClick={() => this.updateKey(item.key)} data-toggle="modal" data-target="#modalImageQr"> CODE QR </a>
               </figcaption>
             </figure>
+            <Link to={"/target/"+ item.key}>Entrar</Link>
           </div>
           )}
         </div>
@@ -59,9 +62,9 @@ class Events extends Component {
   }
 
   render() {
-
     return (
       <div className="container py-4">
+        <ModalQr keyTarget={ this.state.key } />
         { this.renderTargets() }
       </div>
     );

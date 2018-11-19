@@ -25,6 +25,7 @@ class ModalForm extends Component {
     }
     
     this.handleChange = this.handleChange.bind(this);
+    this.handleEvents = this.handleEvents.bind(this);
 
   }
 
@@ -37,7 +38,7 @@ class ModalForm extends Component {
       category: props.item ? props.item.category : '',
       urlPhoto: props.item ? props.item.url : '',
       uid: props.user ? props.user.uid : '',
-      fullName : props.user ? props.user.displayName : '',
+      fullName: props.user ? props.user.displayName: '',
       email: props.user ? props.user.email : ''
     });
   }

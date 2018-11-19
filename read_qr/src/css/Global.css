@@ -101,6 +101,9 @@ figure.snip1174 a {
 
 figure.snip1174 a:hover {
   background-color: rgba(0, 0, 0, 0.2);
+  color: #a39d9d;
+  border-color: #a39d9d;
+  text-decoration: none;
 }
 
 figure.snip1174.blue {

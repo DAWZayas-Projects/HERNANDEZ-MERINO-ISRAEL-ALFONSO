@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			user: null,
@@ -20,7 +20,7 @@ class Header extends Component {
 	componentWillReceiveProps(props) {
 		this.setState({
 			user: props.user, 
-			items : props.items 
+			items: props.items 
 		});
 	}
 
@@ -94,11 +94,11 @@ class Header extends Component {
 						<div className="dropdown-divider mt-2"></div>
 							{ this.renderLogged() }
 		
-						<ul className="navbar-nav" data-toggle="collapse" data-target="#navbarNav">
+						<ul className="navbar-nav">
 
 							{ this.state.items && this.state.items.map((item, key) => 
 								<li className="nav-item" key={ key }>
-									<Link className={!this.state.user ? item.title === 'Eventos' ? 'nav-link text-secondary disabled-link' : 'nav-link text-white' : 'nav-link text-white' } to={ item.url }> { item.title } </Link>
+									<Link className="nav-link text-white" to={ item.url }> { item.title } </Link>
 								</li>
 							)}
 

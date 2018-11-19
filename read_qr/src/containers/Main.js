@@ -32,7 +32,7 @@ class Container extends Component {
 		
 	}
 
-	componentDidMount() {
+	componentWillMount() {
     store.subscribe(() => {
       this.setState({ user: store.getState().user });
     });

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 // Assets
 import store from '../../stored/store';
-//Common
+// Common
 import ModalForm from '../common/ModalForm';
 // Firebase
 import firebase from 'firebase/app';
@@ -24,16 +24,16 @@ class Home extends Component {
 
   // Methods
 
-  componentDidMount() {
+  componentWillMount() {
+    
     store.subscribe(() => {
       this.setState({ user: store.getState().user });
     });
-  }
 
-  componentWillMount() {
     firebase.database().ref('/events/').once('value').then((snapshot) => {
       this.setState({ events: snapshot.val() })
     });
+
   }
 
   // Functions
