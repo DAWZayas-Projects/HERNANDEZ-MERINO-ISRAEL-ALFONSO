@@ -1,6 +1,5 @@
 // Dependencies
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 // Firebase
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -14,7 +13,7 @@ class Events extends Component {
 
     this.state = {
       uid: localStorage.getItem('uid'),
-      key: '',
+      pass: null,
       targets: null
     };
 
@@ -32,8 +31,8 @@ class Events extends Component {
 
   // Functions //
 
-  updateKey(key) {
-    this.setState({ key })
+  updateKey(pass) {
+    this.setState({ pass })
   }
 
   renderTargets() {
@@ -43,17 +42,16 @@ class Events extends Component {
           { Object.values(this.state.targets).map((item, key) =>
             <div className="col-md-4" key={ key }>
             <figure className="snip1174 navy">
-              <img src={ item.urlPhoto } alt="sq-sample33" />
+              <img src={ item.photoEvent } alt="sq-sample33" />
               <figcaption>
-                <h2> { item.title } </h2>
+                <h2> { item.titleEvent } </h2>
                 <p> 
-                  { item.date } <br />
-                  <b> { item.city } </b> 
+                  { item.dateEvent } <br />
+                  <b> { item.cityEvent } </b> 
                 </p>
-                <a href="/" className="btn btn-link" onClick={() => this.updateKey(item.key)} data-toggle="modal" data-target="#modalImageQr"> CODE QR </a>
+                <a href="/" className="btn btn-link" onClick={() => this.updateKey(item)} data-toggle="modal" data-target="#modalImageQr"> CODE QR </a>
               </figcaption>
             </figure>
-            <Link to={"/target/"+ item.key}>Entrar</Link>
           </div>
           )}
         </div>
@@ -64,7 +62,7 @@ class Events extends Component {
   render() {
     return (
       <div className="container py-4">
-        <ModalQr keyTarget={ this.state.key } />
+        <ModalQr passTarget={ this.state.pass } />
         { this.renderTargets() }
       </div>
     );

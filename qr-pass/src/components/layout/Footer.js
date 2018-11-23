@@ -40,7 +40,7 @@ class Footer extends Component {
         </div>
 
         <div className="footer-copyright text-center py-3 text-white">© 2018 Copyright:
-          <a href="/"> ReadQr.com</a>
+          <a href="/"> QrPass.com</a>
         </div>
 
       </footer>

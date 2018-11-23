@@ -12,18 +12,13 @@ class ModalForm extends Component {
 
     this.state = {
       isLogin: false,
-      title: '',
       uid: '',
       fullName: '',
-      category:'',
-      urlPhoto: '',
       address: '',
       city: '',
       email: '',
       telf: '',
-      date: ''
     }
-    
     this.handleChange = this.handleChange.bind(this);
     this.handleEvents = this.handleEvents.bind(this);
 
@@ -34,12 +29,15 @@ class ModalForm extends Component {
   componentWillReceiveProps (props) {
 		this.setState({ 
       isLogin: props.user ? true : false,
-      title: props.item ? props.item.title : '',
-      category: props.item ? props.item.category : '',
-      urlPhoto: props.item ? props.item.url : '',
       uid: props.user ? props.user.uid : '',
       fullName: props.user ? props.user.displayName: '',
-      email: props.user ? props.user.email : ''
+      email: props.user ? props.user.email : '',
+      titleEvent: props.item ? props.item.title : '',
+      categoryEvent: props.item ? props.item.category : '',
+      photoEvent: props.item ? props.item.url : '',
+      cityEvent: props.item ? props.item.city : '',
+      dateEvent: props.item ? props.item.date : '',
+      hourEvent: props.item ? props.item.hour : ''
     });
   }
 
@@ -66,27 +64,26 @@ class ModalForm extends Component {
 
     const data = {
       key: newTargetKey,
-      category: this.state.category,
-      title: this.state.title,
-      urlPhoto: this.state.urlPhoto,
       fullName: this.state.fullName,
       address: this.state.address,
       city: this.state.city,
       email: this.state.email,
       telf: this.state.telf,
-      date: new Date().toJSON().slice(0,10)
+      categoryEvent: this.state.categoryEvent,
+      titleEvent: this.state.titleEvent,
+      cityEvent: this.state.cityEvent,
+      photoEvent: this.state.photoEvent,
+      dateEvent: this.state.dateEvent,
+      hourEvent: this.state.hourEvent,
+      dateTicket: new Date().toJSON().slice(0,10)
     }
 
     const updates = {}
-
     updates['/targets/' + newTargetKey] = data;
-        
     if (this.state.isLogin) {
       updates['/registered/' + this.state.uid +'/' + newTargetKey] = data;
     }
-
     firebase.database().ref().update(updates);
-   
     setTimeout(() => { window.location.reload(true) }, 750);
    
   }
@@ -101,7 +98,7 @@ class ModalForm extends Component {
           <div className="modal-content">
 
             <div className="modal-header text-center">
-              <h4 className="modal-title w-100 font-weight-bold">{ this.state.category }</h4>
+              <h4 className="modal-title w-100 font-weight-bold">{ this.state.categoryEvent }</h4>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
@@ -109,7 +106,6 @@ class ModalForm extends Component {
 
             <form onSubmit={ this.handleEvents }>
               <div className="modal-body mx-3">
-
                 <div className="md-form mb-2">
                   <label htmlFor="validationDefault01" >Nombre Completo:</label>
                   <input type="text" ref="fullName" className="form-control" minLength="10" id="validationDefault01" value={ this.state.fullName } onChange={ this.handleChange } disabled={this.state.isLogin} required/> 
@@ -136,10 +132,8 @@ class ModalForm extends Component {
                 <div className="modal-footer d-flex justify-content-center">
                   <button type="submit" className="btn btn-indigo" value="submit">Enviar <i className="fa fa-paper-plane-o ml-1" ></i></button>
                 </div>
-               
-              </div>
+               </div>
             </form>
-            
 
           </div>
         </div>
