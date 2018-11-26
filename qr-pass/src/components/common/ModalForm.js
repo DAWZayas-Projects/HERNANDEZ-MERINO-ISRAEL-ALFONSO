@@ -60,10 +60,10 @@ class ModalForm extends Component {
     console.log('Saving in firebase...');
 
     // Get a key for a new Workout.
-    const newTargetKey = firebase.database().ref('/targets/').push().key
+    const newCardsKey = firebase.database().ref('/cards/').push().key
 
     const data = {
-      key: newTargetKey,
+      key: newCardsKey,
       fullName: this.state.fullName,
       address: this.state.address,
       city: this.state.city,
@@ -79,9 +79,9 @@ class ModalForm extends Component {
     }
 
     const updates = {}
-    updates['/targets/' + newTargetKey] = data;
+    updates['/cards/' + newCardsKey] = data;
     if (this.state.isLogin) {
-      updates['/registered/' + this.state.uid +'/' + newTargetKey] = data;
+      updates['/registered/' + this.state.uid +'/' + newCardsKey] = data;
     }
     firebase.database().ref().update(updates);
     setTimeout(() => { window.location.reload(true) }, 750);

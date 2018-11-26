@@ -10,12 +10,14 @@ class ModalQr extends Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ 
-      token: props.passTarget ? props.passTarget.key : '',
-      userName: props.passTarget ? props.passTarget.fullName : '',
-      titleEvent: props.passTarget ? props.passTarget.titleEvent : '',
-      hourEvent: props.passTarget ? props.passTarget.hourEvent : '',
-    });
+    if (props.passCard) {
+      this.setState({ 
+          token: props.passCard.key,
+          userName: props.passCard.fullName ,
+          titleEvent: props.passCard.titleEvent,
+          hourEvent: props.passCard.hourEvent
+      });
+    }
   }
 
   render() {
@@ -31,7 +33,7 @@ class ModalQr extends Component {
               </button>
             </div>
             <div className="modal-body text-center mt-2 mb-3">
-              <QRCode value={"https://final-app-dd7be.firebaseapp.com/target/"+this.state.token} size={250} />
+              <QRCode value={"https://final-app-dd7be.firebaseapp.com/card/"+this.state.token} size={250} />
               <div>
                 <p>
                   <span className="title-event text-primary"> { this.state.titleEvent } </span> <br />

@@ -14,7 +14,7 @@ class Events extends Component {
     this.state = {
       uid: localStorage.getItem('uid'),
       pass: null,
-      targets: null
+      cards: null
     };
 
   }
@@ -24,7 +24,7 @@ class Events extends Component {
   componentWillMount() {
 
     firebase.database().ref('/registered/'+ this.state.uid +'/').once('value').then((snapshot) => {
-      this.setState({ targets: snapshot.val() });
+      this.setState({ cards: snapshot ? snapshot.val() : '' });
     }); 
 
   }
@@ -35,11 +35,11 @@ class Events extends Component {
     this.setState({ pass })
   }
 
-  renderTargets() {
-    if (this.state.targets) {
+  renderCards() {
+    if (this.state.cards) {
       return (
         <div className="row">
-          { Object.values(this.state.targets).map((item, key) =>
+          { Object.values(this.state.cards).map((item, key) =>
             <div className="col-md-4" key={ key }>
             <figure className="snip1174 navy">
               <img src={ item.photoEvent } alt="sq-sample33" />
@@ -62,8 +62,8 @@ class Events extends Component {
   render() {
     return (
       <div className="container py-4">
-        <ModalQr passTarget={ this.state.pass } />
-        { this.renderTargets() }
+        <ModalQr passCard={ this.state.pass } />
+        { this.renderCards() }
       </div>
     );
 

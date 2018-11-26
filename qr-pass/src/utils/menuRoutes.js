@@ -6,7 +6,7 @@ import Container from '../containers/Main';
 import Home from '../components/pages/Home';
 import Events from '../components/pages/Events';
 import Contact from '../components/pages/Contact';
-import Target from '../components/pages/Target';
+import Card from '../components/pages/Card';
 
 
 const MenuRoutes = () => 
@@ -15,7 +15,7 @@ const MenuRoutes = () =>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/events" component={Events} />
 			<Route exact path="/contact" component={Contact} />
-			<Route path="/target/:token" component={Target} />
+			<Route path="/card/:token" component={Card} />
 		</Switch>
 	</Container>;
 	

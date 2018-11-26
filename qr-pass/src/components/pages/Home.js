@@ -53,7 +53,7 @@ class Home extends Component {
                 <img className="card-img-top" src={ item.url } alt="" />
                 <div className="card-body">
                   <h4 className="card-title">{ item.title }</h4>
-                  <div className="tourname">Home Tour</div>
+                  <div className="tourname">{ item.subtitle }</div>
                   <div className="date">{ item.date }</div>
                   <div className="location bold">{ item.city }</div>
                   <div className="rip"></div>
