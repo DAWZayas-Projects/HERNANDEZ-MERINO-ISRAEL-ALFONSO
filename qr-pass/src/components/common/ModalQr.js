@@ -1,6 +1,10 @@
 // Dependencies
 import React, { Component} from 'react';
 import QRCode from 'qrcode.react';
+import html2canvas from 'html2canvas';
+import * as jsPDF from 'jspdf';
+
+
 
 class ModalQr extends Component {
 
@@ -20,14 +24,25 @@ class ModalQr extends Component {
     }
   }
 
+  getscreenshot() {
+
+    html2canvas(document.querySelector('#capture')).then(canvas => {
+			let pdf = new jsPDF('p', 'mm', [100,110]);
+			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 100, 110);
+			pdf.save("card.pdf");
+    });
+    
+}
+
   render() {
 
     return (
       <div className="modal fade" id="modalImageQr" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
-          <div className="modal-content">
+
+          <div className="modal-content" id="capture">
             <div className="modal-header text-center">
-            <h5 className="modal-title"> <i className="fa fa-user mr-2" /> { this.state.userName} </h5>
+            <h5 className="modal-title"> <i className="fa fa-user mr-2" /> { this.state.userName } </h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -39,11 +54,11 @@ class ModalQr extends Component {
                   <span className="title-event text-primary"> { this.state.titleEvent } </span> <br />
                   <span> <b> Hora: </b> { this.state.hourEvent } </span>
                 </p>
-                <button type="button" className="btn btn-info">Descargar</button>
+                <button onClick={() => this.getscreenshot()} className="btn btn-info">Descargar</button>
               </div>
             </div>
-            
           </div>
+
         </div>
       </div>
     )

@@ -163,6 +163,10 @@ input {
   font-size: 30px;
 }
 
+.modal-pdf {
+  display: block;
+}
+
 /*// HEADER //*/
 .disabled-link {
 	pointer-events: none;
