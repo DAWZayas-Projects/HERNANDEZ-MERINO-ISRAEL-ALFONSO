@@ -75,6 +75,7 @@ class ModalForm extends Component {
       photoEvent: this.state.photoEvent,
       dateEvent: this.state.dateEvent,
       hourEvent: this.state.hourEvent,
+      access: 'si',
       dateTicket: new Date().toJSON().slice(0,10)
     }
 

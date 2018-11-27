@@ -9,7 +9,8 @@ class Card extends Component {
   constructor() {
     super();
     this.state = {
-      card: ''
+      card: '',
+      token: ''
     }
 
   }
@@ -18,8 +19,24 @@ class Card extends Component {
   componentDidMount() {
     const { match: {params}} = this.props;
     firebase.database().ref('/cards/'+ params.token +'/').once('value').then((snapshot) => {
-      this.setState({ card: snapshot ? snapshot.val() : '' })
+      this.setState({ 
+        card: snapshot ? snapshot.val() : '',
+        token: params ? params.token : ''   
+      })
     });
+  }
+
+  updateAccess() {
+    if (this.state.card && this.state.token) {
+
+      if (this.state.card.access === 'si') {
+        firebase.database().ref('/cards/'+ this.state.token +'/').update({access: 'no'});
+        return <h3 className="text-success text-center mb-4"> Acceso Permitido </h3>
+      } else {
+        return <h3 className="text-danger text-center mb-4"> Acceso Denegado </h3>
+      }
+
+    }
   }
 
 
@@ -31,7 +48,7 @@ class Card extends Component {
           <div className="card bg-light mt-2 mb-2">
             <img className="card-img-top" src={ this.state.card.photoEvent } alt="" />
             <div className="card-body">
-              <h3 className="text-success text-center mb-4"> Acceso Permitido </h3>
+              { this.updateAccess() }
               <h4 className="card-title">{ this.state.card.titleEvent }</h4>
               <div className="date">{ this.state.card.dateEvent }, { this.state.card.hourEvent }</div>
               <div className="location bold">{ this.state.card.cityEvent }</div>
